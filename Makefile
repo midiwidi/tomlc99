@@ -1,6 +1,8 @@
 CFILES = toml.c
 
-CFLAGS = -std=c99 -Wall -Wextra -fpic
+# Markus: added override and += to be abled to pass CFLAGS to the make file and removed flag -fpic
+override CFLAGS += -std=c99 -Wall -Wextra
+
 # to compile for debug: make DEBUG=1
 # to compile for no debug: make
 ifdef DEBUG
@@ -18,10 +20,11 @@ all: $(LIB) $(LIB_SHARED) $(EXEC)
 
 
 libtoml.a: toml.o
-	ar -rcs $@ $^
+	$(AR) -rcs $@ $^
 
 libtoml.so: toml.o
-	$(CC) -shared -o $@ $^
+	# Markus: commented this out
+	#$(CC) -shared -o $@ $^
 
 toml_json: toml_json.c $(LIB)
 
