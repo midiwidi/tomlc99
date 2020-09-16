@@ -1,3 +1,6 @@
+CC = arm-linux-gnueabihf-gcc
+AR = arm-linux-gnueabihf-ar
+
 CFILES = toml.c
 
 # Only set CFLAGS if undefined
@@ -5,7 +8,9 @@ CFLAGS ?= -std=c99 -Wall -Wextra -fpic
 
 # to compile for debug: make DEBUG=1
 ifdef DEBUG
-    CFLAGS += -O0 -g
+	CFLAGS += -O0 -g
+else
+	CFLAGS += -O3
 endif
 
 EXEC = toml_json toml_cat
